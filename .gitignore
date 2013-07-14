@@ -1,4 +1,5 @@
 bundle/
 backup/
 transition/
+tmp/
 .netrwhist
