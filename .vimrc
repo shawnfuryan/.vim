@@ -71,7 +71,8 @@ let g:pep8_map='<f8>'
 " Set TaskList mapping
 map <leader>td <Plug>TaskList
 " Set Gundo Diff Explorer mapping
-map <leader>g :GundoToggle<CR>
+" TODO Figure out what's wrong with the command below
+" map <leader>g :GundoToggle<CR>
 
 " TODO  finish implementing IDE settings #Revision-History
 
