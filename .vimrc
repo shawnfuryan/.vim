@@ -72,6 +72,10 @@ let g:pep8_map='<leader>8'
 map <leader>td <Plug>TaskList
 " Set Gundo Diff Explorer mapping
 map <leader>g :GundoToggle<CR>
+" Supertab Settings
+au FileType python set omnifunc=pythoncomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+set completeopt=menuone,longest,preview
 
 " TODO  finish implementing IDE settings #Revision-History
 
