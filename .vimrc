@@ -67,7 +67,7 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 
 " Work Around conflict with <f5> mapping for pep8
-let g:pep8_map='<f8>'
+let g:pep8_map='<leader>8'
 " Set TaskList mapping
 map <leader>td <Plug>TaskList
 " Set Gundo Diff Explorer mapping
@@ -80,7 +80,7 @@ autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 " Programming, Syntax Highlighting, etc.
 filetype plugin indent on
-syntax enable
+syntax on
 set grepprg=grep\ -nH\ $*
 set autoindent
 set tabstop=8
