@@ -3,7 +3,10 @@ set backup
 set backupdir=~/.vim/backup
 set directory=~/.vim/tmp
 
-" BEGIN Settings required for Vundle
+"-------------------------------------
+" BEGIN SECTION
+" Settings required for Vundle
+"-------------------------------------
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle
@@ -35,7 +38,7 @@ Bundle 'pep8'
 Bundle 'alfredodeza/pytest'
 Bundle 'reinh/vim-makegreen'
 Bundle 'TaskList.vim'
-" Bundle 'sontek/rope-vim'
+Bundle 'sontek/rope-vim'
 
 
 " Github repos of the user vim-scripts
@@ -48,36 +51,33 @@ Bundle 'python_match.vim'
 Bundle 'snipMate'
 
 filetype plugin indent on
-" END Settings required for Vundle
+"-------------------------------------
+" END SECTION
+" Settings required for Vundle
+"-------------------------------------
 
-
-" NERDTree Settings
-" Toggle NERDTree w/ f2
-map <f2> :NERDTreeToggle<CR>
-
+"--------------------------------------------------------------------
+" BEGIN SECTION
 " Recommended Settings from 'Turning Vim Into a Modern Python IDE'
 " by sonotek
 " sontek.net/blog/detail/turning-vim-into-a-modern-python-ide
+"--------------------------------------------------------------------
 set foldmethod=indent
 set foldlevel=99
-" Change windows w/ ctr+[hjkl] instead of ctr+w+[hjkl]
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
 
-" Work Around conflict with <f5> mapping for pep8
-let g:pep8_map='<leader>8'
-" Set TaskList mapping
-map <leader>td <Plug>TaskList
-" Set Gundo Diff Explorer mapping
-map <leader>g :GundoToggle<CR>
 " Supertab Settings
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
 
 " TODO  finish implementing IDE settings #Revision-History
+
+"--------------------------------------------------------------------
+" END SECTION
+" Recommended Settings from 'Turning Vim Into a Modern Python IDE'
+" by sonotek
+" sontek.net/blog/detail/turning-vim-into-a-modern-python-ide
+"--------------------------------------------------------------------
 
 " Remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
@@ -106,15 +106,8 @@ set background=dark
 set mouse=a
 set ignorecase
 set smartcase
-" Remap jj to escape when in insert mode, so that you enter movement mode
-" instead of inserting jj
-inoremap jj <Esc>
-nnoremap JJJJ <Nop>
 set incsearch
 set hlsearch
-" Remap search buttons so that screen centers on next/prev search term
-map N Nzz
-map n nzz
 
 " Look and Feel
 " Color Scheme
@@ -126,6 +119,44 @@ if has("gui_running")
 endif
 " Set up status
 set laststatus=2
-set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
+set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ %{fugitive#statusline()}\ [%l,%v][%p%%]
 
 " execute pathogen#infect()
+
+"------------------
+" BEGIN SECTION
+" Key Remappings
+"------------------
+" Remap the <Leader> key to ','
+let mapleader=","
+
+" Plugin Specific Remappings
+map <f2> :NERDTreeToggle<CR>
+let g:pep8_map='<f8>'
+map <leader>td <Plug>TaskList
+map <leader>g :GundoToggle<CR>
+map <leader>j :RopeGotoDefinition<CR>
+map <leader>r :RopeRename<CR>
+nmap <leader>a <Esc>:Ack!
+
+
+" Convenience Remappings
+" Change windows w/ ctr+[hjkl] instead of ctr+w+[hjkl]
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
+" Remap jj to escape when in insert mode, so that you enter movement mode
+" instead of inserting jj
+inoremap jj <Esc>
+nnoremap JJJJ <Nop>
+
+" Remap search buttons so that screen centers on next/prev search term
+map N Nzz
+map n nzz
+
+"------------------
+" END SECTION
+" Key Remappings
+"------------------
