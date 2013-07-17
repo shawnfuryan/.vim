@@ -40,7 +40,6 @@ Bundle 'reinh/vim-makegreen'
 Bundle 'TaskList.vim'
 Bundle 'sontek/rope-vim'
 
-
 " Github repos of the user vim-scripts
 " Bundle 'L9'
 " Bundle 'FuzzyFinder'
@@ -70,8 +69,24 @@ au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
 
-" TODO  finish implementing IDE settings #Revision-History
+" Add the virtualenv's site-packages to vim path
+py << EOF
+import os.path
+import sys
+import vim
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
 
+" Enables code completion for django modules
+"export DJANGO_SETTINGS_MODULE=project.settings
+
+
+" TODO  finish implementing IDE settings
+"
 "--------------------------------------------------------------------
 " END SECTION
 " Recommended Settings from 'Turning Vim Into a Modern Python IDE'
@@ -101,13 +116,38 @@ set wildmode=list:longest,full
 
 " Random Niceties
 set noerrorbells
-set background=dark
 " Enable mouse support in console
 set mouse=a
 set ignorecase
 set smartcase
 set incsearch
 set hlsearch
+
+" Coming Home to Vim Recommendations
+set modelines=0
+set encoding=utf-8
+set scrolloff=3
+set showmode
+set showcmd
+set hidden
+set wildmode=list:longest
+set visualbell
+set cursorline
+set ttyfast
+set ruler
+set backspace=indent,eol,start
+set undofile
+set gdefault
+set showmatch
+set wrap
+set textwidth=79
+set formatoptions=qrnl
+set colorcolumn=85
+" save when buffer loses focus
+au FocusLost * :wa
+
+
+
 
 " Look and Feel
 " Color Scheme
@@ -121,7 +161,10 @@ endif
 set laststatus=2
 set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ %{fugitive#statusline()}\ [%l,%v][%p%%]
 
-" execute pathogen#infect()
+"colorscheme vitamins
+colorscheme molokai
+"colorscheme mustang
+
 
 "------------------
 " BEGIN SECTION
@@ -138,6 +181,10 @@ map <leader>g :GundoToggle<CR>
 map <leader>j :RopeGotoDefinition<CR>
 map <leader>r :RopeRename<CR>
 nmap <leader>a <Esc>:Ack!
+map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
+
+" Bindings automatically handled by Plugins
+"
 
 
 " Convenience Remappings
@@ -155,6 +202,13 @@ nnoremap JJJJ <Nop>
 " Remap search buttons so that screen centers on next/prev search term
 map N Nzz
 map n nzz
+
+" Clear highlighting (especially after a search)
+nnoremap <leader>/ :noh<cr>
+
+" move up/dn by screen line rather than file line
+nnoremap j gj
+nnoremap k gk
 
 "------------------
 " END SECTION
